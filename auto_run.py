@@ -11,6 +11,14 @@ def auto_run():
     #print("regkey: ", regkey)
     print("filename:",filename)
     print("filefullpathname:",filefullpathname)
+    
+    for root, dirs, files in os.walk("C:\\"): #https://stackoverflow.com/questions/1124810/how-can-i-find-path-to-given-file
+        for file in files:
+            if file == filename:
+                os.chdir(root)
+                #print(os.path.abspath(os.path.join(file)))
+                filefullpathname=os.path.abspath(os.path.join(root,file))
+                print(filefullpathname)     
     try:
         #print("regkey: ","reg add "+regkey+" /v stress_"+filename.replace(".exe","")+" /t REG_SZ /d "+filefullpathname+" /f")
         os.system("reg add "+regkey+" /v stress_"+filename.replace(".exe","")+" /t REG_SZ /d "+filefullpathname+" /f")
